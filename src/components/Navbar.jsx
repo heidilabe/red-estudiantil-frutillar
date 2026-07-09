@@ -1,14 +1,26 @@
 import React from 'react';
 
 function Navbar({ activeTab, setActiveTab }) {
+  const handleNavClick = (tabName, isPage = true) => {
+    if (isPage) {
+      setActiveTab(tabName);
+    } else {
+      alert(`Sección "${tabName}" estará disponible próximamente en esta versión de demostración.`);
+    }
+  };
+
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">Red Estudiantil Frutillar</div>
-      <ul className="navbar-links">
+    <nav className="navbar-glass">
+      <div className="navbar-brand">
+        <span className="brand-icon">🎓</span>
+        <span className="brand-text">Red Estudiantil Frutillar</span>
+      </div>
+      
+      <ul className="navbar-nav-links">
         <li>
           <button 
             className={activeTab === 'inicio' ? 'active' : ''} 
-            onClick={() => setActiveTab('inicio')}
+            onClick={() => handleNavClick('inicio')}
           >
             Inicio
           </button>
@@ -16,7 +28,7 @@ function Navbar({ activeTab, setActiveTab }) {
         <li>
           <button 
             className={activeTab === 'estudiantes' ? 'active' : ''} 
-            onClick={() => setActiveTab('estudiantes')}
+            onClick={() => handleNavClick('estudiantes')}
           >
             Estudiantes
           </button>
@@ -24,12 +36,38 @@ function Navbar({ activeTab, setActiveTab }) {
         <li>
           <button 
             className={activeTab === 'noticias' ? 'active' : ''} 
-            onClick={() => setActiveTab('noticias')}
+            onClick={() => handleNavClick('noticias')}
           >
             Noticias
           </button>
         </li>
+        <li>
+          <button onClick={() => handleNavClick('Nosotros', false)}>
+            Nosotros
+          </button>
+        </li>
+        <li>
+          <button onClick={() => handleNavClick('Reuniones', false)}>
+            Reuniones
+          </button>
+        </li>
+        <li>
+          <button onClick={() => handleNavClick('Documentos', false)}>
+            Documentos
+          </button>
+        </li>
+        <li>
+          <button onClick={() => handleNavClick('Contacto', false)}>
+            Contacto
+          </button>
+        </li>
       </ul>
+
+      <div className="navbar-actions">
+        <button className="btn-cta-nav" onClick={() => alert('¡Gracias por tu interés! Formulario de inscripción estará activo pronto.')}>
+          Únete al Grupo
+        </button>
+      </div>
     </nav>
   );
 }
