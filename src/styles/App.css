@@ -152,8 +152,33 @@ main {
   border-color: var(--accent, #aa3bff);
 }
 
-.btn-add-disabled, .btn-action-disabled {
+/* Botón agregar — activo */
+.btn-add-active {
   padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, #aa3bff 0%, #6a11cb 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(170, 59, 255, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-add-active:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(170, 59, 255, 0.4);
+}
+
+.btn-add-active:active {
+  transform: scale(0.97);
+}
+
+/* Botón editar — deshabilitado */
+.btn-action-disabled {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
   background-color: var(--border, #e5e4e7);
   color: #a19da8;
   border: none;
@@ -163,9 +188,24 @@ main {
   opacity: 0.7;
 }
 
-.btn-action-disabled {
+/* Botón eliminar — activo */
+.btn-action-delete {
   padding: 0.4rem 0.8rem;
   font-size: 0.85rem;
+  background-color: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.btn-action-delete:hover {
+  background-color: #dc2626;
+  color: #fff;
+  border-color: #dc2626;
+  transform: scale(1.03);
 }
 
 /* Estudiantes Grid */
@@ -221,4 +261,137 @@ main {
   color: var(--text, #6b6375);
   font-style: italic;
   padding: 2rem;
+}
+
+/* ── Modal Glassmorphism ─────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal-glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 20px 60px rgba(106, 17, 203, 0.15), 0 8px 24px rgba(0,0,0,0.08);
+  animation: modalEnter 0.25s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal-glass {
+    background: rgba(26, 27, 38, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+}
+
+@keyframes modalEnter {
+  from { opacity: 0; transform: scale(0.94) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-titulo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-h, #08060d);
+  margin: 0 0 1.75rem 0;
+  letter-spacing: -0.5px;
+}
+
+/* ── Formulario dentro del modal ─────────────────────────────────── */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-h, #08060d);
+}
+
+.form-input {
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--border, #e5e4e7);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: var(--text-h, #08060d);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--accent, #aa3bff);
+  box-shadow: 0 0 0 3px rgba(170, 59, 255, 0.1);
+}
+
+.form-input.input-error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08);
+}
+
+.error-msg {
+  font-size: 0.8rem;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.btn-modal-cancelar {
+  padding: 0.7rem 1.4rem;
+  background: transparent;
+  color: var(--text, #6b6375);
+  border: 1.5px solid var(--border, #e5e4e7);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-modal-cancelar:hover {
+  background-color: var(--code-bg, #f4f3ec);
+  border-color: var(--text, #6b6375);
+}
+
+.btn-modal-guardar {
+  padding: 0.7rem 1.6rem;
+  background: linear-gradient(135deg, #aa3bff 0%, #6a11cb 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(170, 59, 255, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-modal-guardar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(170, 59, 255, 0.4);
 }
